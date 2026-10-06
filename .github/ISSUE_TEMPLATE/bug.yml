@@ -1,0 +1,21 @@
+name: Report a problem with a transition
+description: Something renders wrong, a parameter misbehaves, or the swap shows.
+labels: [bug]
+body:
+  - type: input
+    id: id
+    attributes:
+      label: Transition id and version
+      placeholder: liquid-fill@1.0.0
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happens, and what you expected
+    validations:
+      required: true
+  - type: textarea
+    id: props
+    attributes:
+      label: Parameters, duration, frame size, Remotion version, and --gl setting

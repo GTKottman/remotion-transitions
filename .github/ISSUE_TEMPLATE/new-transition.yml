@@ -1,0 +1,27 @@
+name: Propose a transition
+description: Suggest a transition for the library before building it.
+labels: [proposal]
+body:
+  - type: textarea
+    id: look
+    attributes:
+      label: What it looks like
+      description: Describe it frame by frame, or link a reference video.
+    validations:
+      required: true
+  - type: input
+    id: family
+    attributes:
+      label: Family › subfamily
+      description: Use the decision procedure in TAXONOMY.md section 2.
+  - type: textarea
+    id: uses
+    attributes:
+      label: Where it would be used
+  - type: checkboxes
+    id: rules
+    attributes:
+      label: Design rules (TAXONOMY.md section 10)
+      options:
+        - label: The incoming scene's colour arrives through something on screen
+        - label: It isn't a dated gimmick (3D flips, cubes, blinds, checkerboards, clock wipes, star irises, shatter)

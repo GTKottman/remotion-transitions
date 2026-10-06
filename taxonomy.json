@@ -1,0 +1,421 @@
+{
+  "schemaVersion": 1,
+  "families": [
+    {
+      "slug": "01-cut",
+      "name": "Cut",
+      "number": 1,
+      "definition": "A changes to B between two consecutive frames, with no in-between frames.",
+      "test": "Step through frame by frame: does any frame mix A and B? If not, it is a Cut.",
+      "notHere": "A cut with added motion blur is 05 Motion › Whip. A cut hidden under a flash is 09 Light › Flash.",
+      "build": "Holds guides, references and sound-hit templates rather than overlays.",
+      "subfamilies": [
+        {
+          "slug": "match-cut",
+          "name": "Match Cut",
+          "definition": "A and B share a form, motion, colour or composition, so the eye carries across.",
+          "examples": "circle → moon, door slam → gavel"
+        },
+        {
+          "slug": "smash-cut",
+          "name": "Smash Cut",
+          "definition": "An abrupt jump in tone, volume or energy, for contrast or comedy.",
+          "examples": "silence → loud party"
+        },
+        {
+          "slug": "jump-cut",
+          "name": "Jump Cut",
+          "definition": "The same subject with a jump in time.",
+          "examples": "vlog cuts, montage of a drawing appearing"
+        },
+        {
+          "slug": "audio-led",
+          "name": "Audio-Led",
+          "definition": "Sound leads or trails the picture (J/L cuts), or a sound hit drives the cut.",
+          "examples": "B's audio under A, whoosh into a hard cut"
+        }
+      ]
+    },
+    {
+      "slug": "02-blend",
+      "name": "Blend",
+      "number": 2,
+      "definition": "A and B mix by opacity. Nothing moves and no edge travels across the frame.",
+      "test": "Is every pixel a weighted mix of A and B (or a flat colour), with no moving boundary?",
+      "notHere": "A dip to white with bloom is 09 Light › Flash. A dissolve through a designed texture map is 03 Wipe.",
+      "build": "Remotion built-in: fade().",
+      "subfamilies": [
+        {
+          "slug": "crossfade",
+          "name": "Crossfade",
+          "definition": "A fades out while B fades in.",
+          "examples": "standard dissolve, slow dream dissolve"
+        },
+        {
+          "slug": "dip-to-colour",
+          "name": "Dip to Colour",
+          "definition": "A fades to a flat colour, then B fades in from it.",
+          "examples": "dip to black, white, brand colour"
+        },
+        {
+          "slug": "luma-dissolve",
+          "name": "Luma Dissolve",
+          "definition": "The image's own brightness decides which pixels change first.",
+          "examples": "highlights-first dissolve"
+        },
+        {
+          "slug": "blend-mode",
+          "name": "Blend Mode",
+          "definition": "The mix uses a blend mode instead of normal opacity.",
+          "examples": "additive film dissolve, difference"
+        }
+      ]
+    },
+    {
+      "slug": "03-wipe",
+      "name": "Wipe",
+      "number": 3,
+      "definition": "A moving, designed boundary separates A from B until B fills the frame.",
+      "test": "Is there an edge with A on one side and B on the other, travelling until B fills the frame?",
+      "notHere": "A third layer covering the frame makes it 04 Cover. Slices of A moving away make it 05 Motion › Split. A mask taken from footage brightness makes it 02 Blend › Luma Dissolve.",
+      "build": "Remotion built-ins: wipe(), clockWipe(), iris(). Otherwise, a direct mask presentation.",
+      "subfamilies": [
+        {
+          "slug": "linear",
+          "name": "Linear",
+          "definition": "A straight edge sweeps across.",
+          "examples": "left-to-right, diagonal, soft gradient wipe"
+        },
+        {
+          "slug": "iris",
+          "name": "Iris",
+          "definition": "A circle or shape grows from, or shrinks to, a point.",
+          "examples": "iris in/out, keyhole"
+        },
+        {
+          "slug": "clock",
+          "name": "Clock",
+          "definition": "An edge rotates around a centre.",
+          "examples": "clock wipe, radar sweep"
+        },
+        {
+          "slug": "shape-mask",
+          "name": "Shape Mask",
+          "definition": "B appears through a growing designed shape.",
+          "examples": "logo reveal, letterform mask"
+        },
+        {
+          "slug": "pattern",
+          "name": "Pattern",
+          "definition": "Many small edges at once, in a grid or repeat.",
+          "examples": "blinds, checkerboard, halftone, stripes"
+        },
+        {
+          "slug": "organic",
+          "name": "Organic",
+          "definition": "An irregular, noise-driven edge, with no full cover.",
+          "examples": "ink-edge wipe, liquid edge straight to B"
+        }
+      ]
+    },
+    {
+      "slug": "04-cover",
+      "name": "Cover",
+      "number": 4,
+      "definition": "A third layer (neither A nor B) covers the frame, hides the change, then uncovers B.",
+      "test": "Pause at the middle: is the frame mostly or entirely a layer that is neither A nor B?",
+      "notHere": "A cover made of light is 09 Light. A flat colour faded by opacity is 02 Blend › Dip to Colour. A shape that reveals B inside itself with no cover phase is 03 Wipe › Shape Mask.",
+      "build": "Bridged structure: cover → hold → reveal. One shape engine draws the cover, then draws it inverted so B shows through holes. Reference: Organic/Liquid Fill.",
+      "subfamilies": [
+        {
+          "slug": "organic",
+          "name": "Organic",
+          "definition": "The cover is a fluid, natural or noise-driven substance.",
+          "examples": "liquid fill, ink bleed, paint splat, smoke, reaction-diffusion"
+        },
+        {
+          "slug": "geometric",
+          "name": "Geometric",
+          "definition": "The cover is built from clean shapes.",
+          "examples": "shape burst, grid of circles or squares, hexagon fill"
+        },
+        {
+          "slug": "stroke",
+          "name": "Stroke",
+          "definition": "Drawn strokes sweep across and fill the frame.",
+          "examples": "brush stroke, marker swipe, ribbon"
+        },
+        {
+          "slug": "panel",
+          "name": "Panel",
+          "definition": "Solid slabs slide or unfold across, then off.",
+          "examples": "curtain, sliding colour bars, stacked panels"
+        },
+        {
+          "slug": "stinger",
+          "name": "Stinger",
+          "definition": "A branded or character graphic covers the cut.",
+          "examples": "logo stinger, mascot run-across"
+        }
+      ]
+    },
+    {
+      "slug": "05-motion",
+      "name": "Motion",
+      "number": 5,
+      "definition": "The picture moves rigidly: A and B translate, rotate, scale or flip, whole or in rigid slices.",
+      "test": "Do the pixels keep their shape while they move?",
+      "notHere": "Slices that bend, shatter or smear are 06 Distortion › Break. A zoom into an element containing B is 08 Carry › Portal.",
+      "build": "Remotion built-ins: slide(), flip(). Add motion blur (@remotion/motion-blur) to fast moves.",
+      "subfamilies": [
+        {
+          "slug": "push-slide",
+          "name": "Push Slide",
+          "definition": "B pushes A out, or slides over it.",
+          "examples": "push left, slide up, card stack"
+        },
+        {
+          "slug": "whip",
+          "name": "Whip",
+          "definition": "A very fast move with motion blur hiding the seam.",
+          "examples": "whip pan, whip zoom"
+        },
+        {
+          "slug": "zoom",
+          "name": "Zoom",
+          "definition": "Scale through the frame.",
+          "examples": "zoom-through, punch-in"
+        },
+        {
+          "slug": "spin",
+          "name": "Spin",
+          "definition": "Rotation in the picture plane.",
+          "examples": "spin, roll"
+        },
+        {
+          "slug": "3d-space",
+          "name": "3D Space",
+          "definition": "Rigid 3D moves of the frame.",
+          "examples": "flip, cube, fold, page turn"
+        },
+        {
+          "slug": "split",
+          "name": "Split",
+          "definition": "The frame divides into rigid slices that move apart or together.",
+          "examples": "split-screen slide, shutter halves"
+        }
+      ]
+    },
+    {
+      "slug": "06-distortion",
+      "name": "Distortion",
+      "number": 6,
+      "definition": "The image deforms, degrades or breaks apart, and B emerges from the damage.",
+      "test": "Do the pixels bend, smear, glitch, pixelate or scatter?",
+      "notHere": "Rigid slices are 05 Motion › Split. Blur from a whole-frame move is 05 Motion › Whip.",
+      "build": "Usually a shader or canvas pass, with the amount peaking at the swap point.",
+      "subfamilies": [
+        {
+          "slug": "glitch",
+          "name": "Glitch",
+          "definition": "Digital corruption.",
+          "examples": "RGB split, datamosh, block displacement"
+        },
+        {
+          "slug": "warp",
+          "name": "Warp",
+          "definition": "Smooth non-rigid deformation.",
+          "examples": "ripple, swirl, displacement, liquify"
+        },
+        {
+          "slug": "blur",
+          "name": "Blur",
+          "definition": "Focus or directional blur peaks at the cut.",
+          "examples": "defocus, zoom blur"
+        },
+        {
+          "slug": "pixel",
+          "name": "Pixel",
+          "definition": "The image breaks into pixels or sorted pixels.",
+          "examples": "pixelate, mosaic, pixel sort, dither"
+        },
+        {
+          "slug": "break",
+          "name": "Break",
+          "definition": "The image fractures into pieces or particles.",
+          "examples": "shatter, paper tear, disintegrate"
+        }
+      ]
+    },
+    {
+      "slug": "07-morph",
+      "name": "Morph",
+      "number": 7,
+      "definition": "An element in A changes, through in-between frames, into a different element in B.",
+      "test": "Is something visibly one thing at the start and another thing at the end?",
+      "notHere": "No in-between frames makes it 01 Cut › Match Cut. If the element keeps its identity and leads the eye, it is 08 Carry.",
+      "build": "Needs both scenes, so it is built inside scene code (@remotion/paths interpolatePath, mesh warps).",
+      "subfamilies": [
+        {
+          "slug": "shape",
+          "name": "Shape",
+          "definition": "One vector shape interpolates into another.",
+          "examples": "circle → square, icon → icon"
+        },
+        {
+          "slug": "type",
+          "name": "Type",
+          "definition": "Letters or words change into other letters, words or shapes.",
+          "examples": "word swap, letter → logo"
+        },
+        {
+          "slug": "object",
+          "name": "Object",
+          "definition": "A depicted object becomes another object.",
+          "examples": "cup → planet"
+        },
+        {
+          "slug": "image-morph",
+          "name": "Image Morph",
+          "definition": "Whole images warp into each other via corresponding points.",
+          "examples": "face morph"
+        }
+      ]
+    },
+    {
+      "slug": "08-carry",
+      "name": "Carry",
+      "number": 8,
+      "definition": "A specific element keeps its identity and leads the viewer from A into B.",
+      "test": "Is there an element the eye follows from A into B that stays the same thing throughout?",
+      "notHere": "If the element changes identity it is 07 Morph. A camera move with no leading element is 05 Motion. A big element that only blocks the view is 04 Cover.",
+      "build": "Needs both scenes: one shared element animates across the sequence boundary, or A and B are one composition.",
+      "subfamilies": [
+        {
+          "slug": "object-led",
+          "name": "Object-Led",
+          "definition": "An object travels across and becomes part of B's layout.",
+          "examples": "ball rolls into the next scene"
+        },
+        {
+          "slug": "line-led",
+          "name": "Line-Led",
+          "definition": "A drawn line or path becomes B's structure.",
+          "examples": "line becomes a chart axis, path becomes a route"
+        },
+        {
+          "slug": "type-led",
+          "name": "Type-Led",
+          "definition": "A word or title stays while the scene rebuilds around it.",
+          "examples": "headline stays as the background changes"
+        },
+        {
+          "slug": "portal",
+          "name": "Portal",
+          "definition": "The camera moves into an element that contains B.",
+          "examples": "zoom into a screen, a window, a letter's counter"
+        }
+      ]
+    },
+    {
+      "slug": "09-light",
+      "name": "Light",
+      "number": 9,
+      "definition": "Light washes over the cut: the in-between is luminance, glow or optical artefact.",
+      "test": "Does the frame get brighter, glowing or flared at the cut, with an optical (not flat) quality?",
+      "notHere": "A flat fade to white is 02 Blend › Dip to Colour. A burn-edge wipe with no glow is 03 Wipe › Organic.",
+      "build": "Additive (screen / plus-lighter) layers, with the swap at peak brightness.",
+      "subfamilies": [
+        {
+          "slug": "flash",
+          "name": "Flash",
+          "definition": "A short burst of bright exposure with bloom.",
+          "examples": "white flash, camera flash"
+        },
+        {
+          "slug": "leak",
+          "name": "Leak",
+          "definition": "Soft coloured light drifts across.",
+          "examples": "light leak, prism leak"
+        },
+        {
+          "slug": "burn",
+          "name": "Burn",
+          "definition": "Film or paper burns through.",
+          "examples": "film burn, burn-through"
+        },
+        {
+          "slug": "flare",
+          "name": "Flare",
+          "definition": "A lens flare or light streak sweeps across.",
+          "examples": "anamorphic flare sweep"
+        }
+      ]
+    }
+  ],
+  "facets": {
+    "structure": [
+      "instant",
+      "direct",
+      "bridged",
+      "continuous"
+    ],
+    "origin": [
+      "edge-left",
+      "edge-right",
+      "edge-top",
+      "edge-bottom",
+      "edge-diagonal",
+      "point",
+      "edges-inward",
+      "path",
+      "distributed",
+      "whole-frame"
+    ],
+    "edge": [
+      "none",
+      "hard",
+      "soft",
+      "geometric",
+      "organic",
+      "textured"
+    ],
+    "layers": [
+      "A",
+      "B",
+      "A+B",
+      "third"
+    ],
+    "space": [
+      "2d",
+      "2.5d",
+      "3d"
+    ],
+    "timing": [
+      "snap",
+      "eased",
+      "linear",
+      "elastic",
+      "beat-synced"
+    ],
+    "tone": [
+      "clean",
+      "playful",
+      "bold",
+      "luxe",
+      "gritty",
+      "technical",
+      "retro",
+      "dreamy"
+    ],
+    "function": [
+      "continuity",
+      "progression",
+      "contrast",
+      "section-break",
+      "reveal",
+      "brand",
+      "energy"
+    ]
+  }
+}

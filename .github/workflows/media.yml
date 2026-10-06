@@ -1,0 +1,42 @@
+name: Media
+
+# After a merge, render and publish media for every transition version that has none on the
+# "media" release yet. Idempotent: re-running uploads only what is missing.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: media
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Find versions without media
+        id: missing
+        run: echo "ids=$(node scripts/publish-media.mjs --missing)" >> "$GITHUB_OUTPUT"
+      - name: Browser libraries for Remotion
+        if: steps.missing.outputs.ids != ''
+        run: sudo apt-get update && sudo apt-get install -y libnss3 libdbus-1-3 libatk1.0-0 libgbm-dev libxrandr2 libxkbcommon-dev libxfixes3 libxcomposite1 libxdamage1 libatk-bridge2.0-0 libpango-1.0-0 libcairo2 libcups2
+      - name: Render
+        if: steps.missing.outputs.ids != ''
+        env:
+          REMOTION_GL: swangle
+        run: node scripts/render.mjs ${{ steps.missing.outputs.ids }} --concurrency=2
+      - name: Publish
+        if: steps.missing.outputs.ids != ''
+        run: node scripts/publish-media.mjs ${{ steps.missing.outputs.ids }}

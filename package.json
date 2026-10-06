@@ -1,0 +1,36 @@
+{
+  "name": "remotion-transitions",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "description": "An open library of motion-design transitions for Remotion, organised by a taxonomy.",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "build": "node scripts/build.mjs",
+    "validate": "node scripts/validate.mjs",
+    "typecheck": "tsc",
+    "check": "node scripts/build.mjs --check && node scripts/validate.mjs && tsc",
+    "render": "node scripts/render.mjs",
+    "publish-media": "node scripts/publish-media.mjs"
+  },
+  "dependencies": {
+    "@remotion/bundler": "4.0.532",
+    "@remotion/cli": "4.0.532",
+    "@remotion/fonts": "4.0.532",
+    "@remotion/paths": "4.0.532",
+    "@remotion/renderer": "4.0.532",
+    "@remotion/transitions": "4.0.532",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "remotion": "4.0.532"
+  },
+  "devDependencies": {
+    "@types/react": "^19.3.0",
+    "typescript": "^5.9.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GTKottman/remotion-transitions.git"
+  }
+}
