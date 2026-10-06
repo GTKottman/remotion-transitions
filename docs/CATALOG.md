@@ -70,6 +70,8 @@ by family, then subfamily, then id.
   uploads them). If a request for the current version fails, fall back to the poster or hide the card.
 - GitHub release downloads redirect to a CDN. Browsers follow that automatically; server-side fetches
   must follow redirects.
+- GitHub serves release assets as `application/octet-stream`. A site that needs real media types (or
+  wants its own caching) should proxy or mirror the files rather than link them directly.
 
 ## Parameters
 
